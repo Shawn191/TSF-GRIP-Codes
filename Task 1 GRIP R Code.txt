@@ -1,0 +1,28 @@
+
+# Author: Shawn Ravi
+# Dataset: Student Score Dataset
+# Task-1 : Predicting Score when Number of Hours is given
+
+# Importing required libraries:
+library(utils)
+library(rvest)
+library(dplyr)
+
+# Importing dataset from the source:
+df <- read.csv("https://raw.githubusercontent.com/AdiPersonalWorks/Random/master/student_scores%20-%20student_scores.csv", header=T)
+
+#To find the structure of the columns in the dataset:
+str(df) 
+
+#Plot to visualise the linear regression:
+plot(df$Scores,df$Hours) 
+
+# Modelling(Linear Regression):
+#------------------------------
+
+model <- lm(Scores~Hours,data=df)
+
+# Prediction(For Hours= 9.25):
+#----------------------------
+
+predict(model, newdata= data.frame(Hours=9.25))
