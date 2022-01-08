@@ -1,0 +1,47 @@
+# Author: Shawn Ravi
+# Dataset: Standard Iris Dataset
+# Task-2 : Predicting the optimum Number of Clusters for the given dataset
+
+# Importing required libraries:
+library(utils)
+library(rvest)
+library(dplyr)
+library(stats)
+library(datasets)
+
+
+# Importing dataset from the source:
+data(iris)
+
+# To find the summary of the columns in the dataset:
+summary(iris) 
+
+# To know the structure of the dataset:
+str(iris)
+
+
+# Within Sum of Squares (WSS):
+#-----------------------------
+
+# Compute clustering algorithm (e.g., k-means clustering) for different values of k.
+
+# For instance, by varying k from 1 to 10 clusters, for each k, calculate the total within-cluster sum of square (wss). 
+
+# Plot the curve of wss according to the number of clusters k.
+
+# The location of a bend (knee) in the plot is generally considered as an indicator of the appropriate number of clusters.
+
+# Compute and plot wss for k = 2 to k = 10
+
+m <- 10 # Maximum number of clusters
+
+data <- iris[1:4] # Selecting the numerical columns from the dataset
+
+wss <- sapply(1:m,function(k){kmeans(data, k, nstart=50 )$tot.withinss}) #Applying Kmeans for K=1 to K=10
+
+# Plotting the graph of wss:
+#---------------------------
+
+plot(1:m, wss,type="b", xlab="Number of clusters K",ylab="Total within-clusters sum of squares")
+
+abline(v = 3, lty =3) # Verifies that the location of knee in the plot is at K=3
